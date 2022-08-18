@@ -1,0 +1,25 @@
+.authorization__button {
+  margin-top: 186px;
+  background: #fff;
+  border-radius: 2px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  height: 50px;
+  line-height: 22px;
+  width: 358px;
+}
+
+@media (max-width: 440px) {
+  .authorization__button {
+    width: 300px;
+  }
+}
+
+@media (max-width: 426px) {
+  .authorization__button {
+    width: 260px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}

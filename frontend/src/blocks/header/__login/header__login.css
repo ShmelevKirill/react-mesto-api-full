@@ -1,0 +1,15 @@
+.header__login {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+@media (max-width: 375px) {
+  .header__login {
+    font-size: 13px;
+    line-height: 20px;
+    padding-left: 5px;
+  }
+}

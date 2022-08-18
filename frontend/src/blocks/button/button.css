@@ -1,0 +1,11 @@
+.button {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.button:hover {
+    opacity: 0.6;
+}

@@ -1,0 +1,16 @@
+.header__exit {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #A9A9A9;
+  background-color: inherit;
+  border: none;
+  padding: 0 0 0 24px;
+}
+
+@media (max-width: 425px) {
+  .header__exit {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

@@ -1,0 +1,7 @@
+.profile__photo {
+    position: relative;
+}
+
+.profile__photo:hover .profile__avatar-cover {
+    opacity: 0.8;
+}

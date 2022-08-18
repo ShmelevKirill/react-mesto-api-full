@@ -1,0 +1,21 @@
+.authorization {
+  display: flex;
+  flex-direction: column;
+  max-width: 358px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+@media (max-width: 440px) {
+  .authorization {
+    padding-top: 50px;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 425px) {
+  .authorization {
+    padding-top: 40px;
+    max-width: 260px;
+  }
+}

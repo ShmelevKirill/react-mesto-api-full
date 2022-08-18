@@ -1,0 +1,9 @@
+.element__container_like-count {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    display: flex;
+    margin: 0 20px 20px 0;
+    justify-content: center;
+}

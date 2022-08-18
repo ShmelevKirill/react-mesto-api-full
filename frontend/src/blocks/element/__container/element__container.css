@@ -1,0 +1,7 @@
+.element__container {
+    background: #FFFFFF;
+    border-radius: 0 0 10px 10px;
+    min-height: 80px;
+    display: flex;
+    justify-content: space-between;
+}

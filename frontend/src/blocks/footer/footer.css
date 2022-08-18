@@ -1,0 +1,30 @@
+.footer {
+    margin: auto;
+    max-width: 880px;
+    padding-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        max-width: 618px;
+    }
+}
+
+@media (max-width: 645px) {
+    .footer {
+        padding: 0 40px 60px;
+    }
+}
+
+@media (max-width: 425px) {
+    .footer {
+        max-width: 282px;
+        padding-bottom: 36px;
+    }
+}
+
+@media (max-width: 320px) {
+    .footer {
+        padding: 0 19px 36px;
+    }
+}
