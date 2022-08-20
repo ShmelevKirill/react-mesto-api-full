@@ -52,7 +52,7 @@ function App() {
       api
         .getInitialCards()
         .then((res) => {
-         setCards(res);
+         setCards(res.reverse());
         })
         .catch((err) => console.log(err));
     }
@@ -65,7 +65,7 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
-          setEmail(res.data.email);
+          setEmail(res.email);
           navigate("/");
         })
         .catch((err) => {
@@ -73,11 +73,11 @@ function App() {
         });
     }
   }, [navigate]);
-  
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
-  
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -96,7 +96,7 @@ function App() {
   function handleInfoTooltip() {
     setInfoTooltipOpen(true);
   }
-  
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -244,7 +244,7 @@ function App() {
           <Route
             path="/sign-up"
             element={<Register onRegister={handleRegister} />}
-          />
+          ></Route>
           <Route
             exact
             path="/"

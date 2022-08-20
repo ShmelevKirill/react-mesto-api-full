@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { DEFAULT } = require('./utils/constants');
 const router = require('./routes');
@@ -24,20 +25,11 @@ const limit = rateLimit({
 
 app.use(limit);
 
-mongoose
-  .connect('mongodb://localhost:27017/mestodb', {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log('Connected to db');
-  })
-  .catch(() => {
-    console.log('Error to db connection');
-  });
+app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер не отвечает');
+    throw new Error('Сервер работает нестабильно');
   }, 0);
 });
 
@@ -54,6 +46,17 @@ app.use((err, req, res, next) => {
   });
   next();
 });
+
+mongoose
+  .connect('mongodb://localhost:27017/mestodb', {
+    useNewUrlParser: true,
+  })
+  .then(() => {
+    console.log('Connected to db');
+  })
+  .catch(() => {
+    console.log('Error to db connection');
+  });
 
 app.listen(PORT, () => {
   console.log(`Server listen on ${PORT}`);
