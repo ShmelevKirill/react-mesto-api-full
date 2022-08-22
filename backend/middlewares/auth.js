@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 // eslint-disable-next-line import/no-unresolved
-const { NODE_ENV, JWT_SECRET = 'dev-key' } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const { UnauthorizedError } = require('../errors/errors');
 
