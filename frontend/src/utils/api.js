@@ -83,7 +83,7 @@ class Api {
 }
 
 export const api = new Api ({
-  url: "https://mestoproject.nomoredomains.sbs",
+  url: "https://api.mestoproject.nomoredomains.sbs",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json",
