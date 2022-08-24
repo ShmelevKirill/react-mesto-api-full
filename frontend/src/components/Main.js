@@ -32,7 +32,7 @@ function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onC
               ></button>
             <h2 className="profile__status">{currentUser.about}</h2>
         </div>
-        
+
         <button
           onClick={onAddPlace}
           className="profile__button button"
@@ -40,7 +40,7 @@ function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onC
           aria-label="Добавить фото"
         ></button>
       </section>
-      
+
       <section className="elements" aria-label="Карточки">
         <ul className="elements__list">
           {cards.map((card) => (

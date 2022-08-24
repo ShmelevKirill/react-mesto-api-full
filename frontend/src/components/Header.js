@@ -28,7 +28,7 @@ function Header({ email, onSignOut }) {
         element={
           <div className="header__wrapper">
             <p className="header__login">{email}</p>
-              <button 
+              <button
                 className="header__exit button"
                 onClick={onSignOut}
                 type="button"
@@ -38,9 +38,7 @@ function Header({ email, onSignOut }) {
           </div>
         }
       ></Route>
-    </Routes>
-      
-
+      </Routes>
     </header>
   );
 }

@@ -1,9 +1,9 @@
 class Api {
   constructor({
-    url,
+    baseUrl,
     headers
   }) {
-    this._url = url;
+    this._baseUrl = baseUrl;
     this._headers = headers;
     }
     _handleResponse = (res) => {
@@ -13,12 +13,12 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
     getInitialCards() {
-      return fetch(`${this._url}/cards`, {
+      return fetch(`${this._baseUrl}/cards`, {
           headers: this._headers,
       }).then(this._handleResponse);
     }
     getUserInfo() {
-      return fetch(`${this._url}/users/me`, {
+      return fetch(`${this._baseUrl}/users/me`, {
           headers: this._headers,
       }).then(this._handleResponse);
     }
@@ -29,7 +29,7 @@ class Api {
       name,
       link
     }) {
-        return fetch(`${this._url}/cards`, {
+        return fetch(`${this._baseUrl}/cards`, {
           method: 'POST',
           headers: this._headers,
           body: JSON.stringify({
@@ -42,7 +42,7 @@ class Api {
       name,
       about
     }) {
-        return fetch(`${this._url}/users/me`, {
+        return fetch(`${this._baseUrl}/users/me`, {
           method: 'PATCH',
           headers: this._headers,
           body: JSON.stringify({
@@ -54,7 +54,7 @@ class Api {
     setUserAvatar({
       avatar
     }) {
-        return fetch(`${this._url}/users/me/avatar`, {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
           method: 'PATCH',
           headers: this._headers,
           body: JSON.stringify({
@@ -63,19 +63,19 @@ class Api {
         }).then(this._handleResponse);
     }
     deleteCard(cardId) {
-      return fetch(`${this._url}/cards/${cardId}`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
         headers: this._headers
       }).then(this._handleResponse);
     }
     setLike(cardId) {
-      return fetch(`${this._url}/cards/${cardId}/likes`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: this._headers
       }).then(this._handleResponse);
     }
     deleteLike(cardId) {
-      return fetch(`${this._url}/cards/${cardId}/likes`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers
       }).then(this._handleResponse);
@@ -83,7 +83,7 @@ class Api {
 }
 
 export const api = new Api ({
-  url: "https://api.mestoproject.nomoredomains.sbs",
+  baseUrl: "https://api.mestoproject.nomoredomains.sbs",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json",

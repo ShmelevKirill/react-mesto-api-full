@@ -1,5 +1,5 @@
 import React from "react";
-import PopupWithForm from "./PopupWithForm.js";
+import PopupWithForm from "./PopupWithForm";
 import { useValidation } from "../utils/useValidation"
 
 export default function EditAvatarPopup({
@@ -40,7 +40,7 @@ export default function EditAvatarPopup({
         id="link-input-avatar"
         placeholder="Ссылка на картинку"
         onChange={handleChange}
-        className={`popup__input popup__container-avatar && "popup__input_type_error"}`}
+        className={`popup__input popup__container-avatar ${errors.avatar && "popup__input_type_error}"}`}
         required
     />
       <span className={`url-avatar-error ${errors.avatar && "popup__input-error"}`}>

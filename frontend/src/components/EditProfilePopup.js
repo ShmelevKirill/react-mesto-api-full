@@ -26,6 +26,7 @@ export default function EditProfilePopup({
         name: currentUser.name,
         about: currentUser.about
       })
+      setIsValid(true);
     }
   }, [currentUser, isOpen, resetForm, setIsValid]);
 

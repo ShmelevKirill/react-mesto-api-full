@@ -41,4 +41,5 @@ export const checkToken = (token) => {
     }
   })
   .then(handleResponse)
+  .then(res => res)
 }

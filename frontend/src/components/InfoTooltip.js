@@ -25,10 +25,10 @@ function InfoTooltip({ isOpen, onClose, image, title }) {
       onClick={handleOverlayClose}
     >
     <div className="popup__authorization-container popup__container">
-    <img 
-      className="popup__authorization-image" 
-      src={image} 
-      alt="Успешно либо нет" 
+    <img
+      className="popup__authorization-image"
+      src={image}
+      alt="результат выполнения операции"
     />
     <h2 className="popup__authorization-text">
       {title}
