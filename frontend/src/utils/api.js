@@ -6,7 +6,7 @@ class Api {
     this._baseUrl = baseUrl;
     this._headers = headers;
     }
-    _handleResponse = (res) => {
+    this_handleResponse = (res) => {
       if (res.ok) {
         return res.json();
       }
@@ -24,13 +24,13 @@ class Api {
     getInitialCards() {
       return fetch(`${this._baseUrl}/cards`, {
           headers: this._headers()
-      }).then(res => this._handleResponse)
+      }).then(res => this._handleResponse(res))
         .then(res => res.data)
     };
     getUserInfo() {
       return fetch(`${this._baseUrl}/users/me`, {
           headers: this._headers()
-      }).then(res => this._handleResponse)
+      }).then(res => this._handleResponse(res))
         .then(res => res.data)
     };
     getAllData() {
@@ -47,7 +47,7 @@ class Api {
             name,
             link
           })
-        }).then(res => this._handleResponse)
+        }).then(res => this._handleResponse(res))
           .then(res => res.data)
     };
     setUserInfo({
@@ -61,7 +61,7 @@ class Api {
               name,
               about
           })
-        }).then(res => this._handleResponse)
+        }).then(res => this._handleResponse(res))
           .then(res => res.data)
     };
     setUserAvatar({
@@ -73,28 +73,28 @@ class Api {
           body: JSON.stringify({
             avatar
           })
-        }).then(res => this._handleResponse)
+        }).then(res => this._handleResponse(res))
           .then(res => res.data)
     };
     deleteCard(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
         headers: this._headers()
-      }).then(res => this._handleResponse)
+      }).then(res => this._handleResponse(res))
         .then(res => res.data)
     };
     setLike(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: this._headers()
-      }).then(res => this._handleResponse)
+      }).then(res => this._handleResponse(res))
         .then(res => res.data)
     };
     deleteLike(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers()
-      }).then(res => this._handleResponse)
+      }).then(res => this._handleResponse(res))
         .then(res => res.data)
     };
 }
