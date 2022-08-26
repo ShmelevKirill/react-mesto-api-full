@@ -12,17 +12,24 @@ class Api {
       }
         return Promise.reject(`Ошибка: ${res.status}`);
     }
+
+    _headers() {
+      const jwt = localStorage.getItem('jwt');
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`
+      };
+    }
+
     getInitialCards() {
       return fetch(`${this._baseUrl}/cards`, {
           headers: this._headers,
-      }).then(this._handleResponse)
-        .then(res => res.data)
+      }).then(this._handleResponse);
     }
     getUserInfo() {
       return fetch(`${this._baseUrl}/users/me`, {
           headers: this._headers,
-      }).then(this._handleResponse)
-        .then(res => res.data)
+      }).then(this._handleResponse);
     }
     getAllData() {
       return Promise.all([this.getInitialCards(), this.getUserInfo()])
@@ -38,8 +45,7 @@ class Api {
             name,
             link
           })
-        }).then(this._handleResponse)
-          .then(res => res.data)
+        }).then(this._handleResponse);
     }
     setUserInfo({
       name,
@@ -52,8 +58,7 @@ class Api {
               name,
               about
           })
-        }).then(this._handleResponse)
-          .then(res => res.data)
+        }).then(this._handleResponse);
     }
     setUserAvatar({
       avatar
@@ -64,36 +69,28 @@ class Api {
           body: JSON.stringify({
             avatar
           })
-        }).then(this._handleResponse)
-          .then(res => res.data)
+        }).then(this._handleResponse);
     }
     deleteCard(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
         headers: this._headers
-      }).then(this._handleResponse)
-        .then(res => res.data)
+      }).then(this._handleResponse);
     }
     setLike(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: this._headers
-      }).then(this._handleResponse)
-        .then(res => res.data)
+      }).then(this._handleResponse);
     }
     deleteLike(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers
-      }).then(this._handleResponse)
-        .then(res => res.data)
+      }).then(this._handleResponse);
     }
 }
 
 export const api = new Api ({
   baseUrl: "https://api.mestoproject.nomoredomains.sbs",
-  headers: {
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    "Content-Type": "application/json",
-  },
 });
