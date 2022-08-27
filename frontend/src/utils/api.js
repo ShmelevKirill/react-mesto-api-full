@@ -1,113 +1,106 @@
 class Api {
-  constructor({
-    baseUrl,
-    headers
-  }) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
+  constructor({ baseUrl}) {
+      this._baseUrl = baseUrl;
   }
 
-
-  _handleResponse = (res) => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
+  getProfile() {
+      return fetch(`${this._baseUrl}/users/me`, {
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
+      })
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-        method: 'GET',
-        headers: this._headers,
+      return fetch(`${this._baseUrl}/cards`, {
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
       })
-      .then(this._handleResponse);
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-        method: 'GET',
-        headers: this._headers,
+  editProfile(name, about) {
+      return fetch(`${this._baseUrl}/users/me`, {
+          method: "PATCH",
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              name,
+              about
+          })
       })
-      .then(this._handleResponse);
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
-  getAllData() {
-    return Promise.all([this.getInitialCards(), this.getUserInfo()])
+  addCard(name, link) {
+      return fetch(`${this._baseUrl}/cards`, {
+          method: "POST",
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              name,
+              link
+          })
+      })
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
-  addCard({
-    name,
-    link
-  }) {
-    return fetch(`${this._baseUrl}/cards`, {
-        method: 'POST',
-        headers: this._headers,
-        body: JSON.stringify({
-          name,
-          link
-        })
+  deleteCardApi(id) {
+      return fetch(`${this._baseUrl}/cards/${id}`, {
+          method: "DELETE",
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
       })
-      .then(this._handleResponse);
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
-  setUserInfo({
-    name,
-    about
-  }) {
-    return fetch(`${this._baseUrl}/users/me`, {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          name,
-          about
-        })
+  addLike(id) {
+      return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+          method: "PUT",
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
       })
-      .then(this._handleResponse);
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
-  setUserAvatar({
-    avatar
-  }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar
-        })
+  deleteLike(id) {
+      return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+          method: "DELETE",
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
       })
-      .then(this._handleResponse);
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
-        method: 'DELETE',
-        headers: this._headers
+  editAvatar(avatar) {
+      return fetch(`${this._baseUrl}/users/me/avatar`, {
+          method: "PATCH",
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              avatar
+          })
       })
-      .then(this._handleResponse);
-  }
-
-  putLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        method: 'PUT',
-        headers: this._headers
-      })
-      .then(this._handleResponse);
-  }
-
-  deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        method: 'DELETE',
-        headers: this._headers
-      })
-      .then(this._handleResponse);
+          .then(res => res.ok ? res.json() : Promise.reject(res.status))
   }
 }
 
 export const api = new Api({
   baseUrl: "https://api.mestoproject.nomoredomains.sbs",
-  headers: {
-    "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
-    "Content-Type": "application/json",
-  },
 });
