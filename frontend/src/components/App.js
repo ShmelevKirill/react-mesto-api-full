@@ -52,7 +52,7 @@ function App() {
       api
         .getInitialCards()
         .then((res) => {
-         setCards(res);
+         setCards(res.reverse());
         })
         .catch((err) => console.log(err));
     }
