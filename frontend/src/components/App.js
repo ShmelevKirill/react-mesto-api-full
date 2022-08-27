@@ -44,13 +44,13 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       api
-        .getUserInfo()
+        .getUserInfo(jwt)
         .then((res) => {
           setCurrentUser(res);
         })
         .catch((err) => console.log(err));
       api
-        .getInitialCards()
+        .getInitialCards(jwt)
         .then((res) => {
          setCards(res.reverse());
         })
