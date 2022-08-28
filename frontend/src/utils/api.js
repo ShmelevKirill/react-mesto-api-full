@@ -1,8 +1,10 @@
 class Api {
   constructor({
     baseUrl,
+    headers
   }) {
     this._baseUrl = baseUrl;
+    this._headers = headers;
   }
 
 
@@ -16,20 +18,14 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
+        headers: this._headers,
       })
       .then(this._handleResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
+        headers: this._headers,
       })
       .then(this._handleResponse);
   }
@@ -44,10 +40,7 @@ class Api {
   }) {
     return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers,
         body: JSON.stringify({
           name,
           link
@@ -62,10 +55,7 @@ class Api {
   }) {
     return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers,
         body: JSON.stringify({
           name,
           about
@@ -79,10 +69,7 @@ class Api {
   }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers,
         body: JSON.stringify({
           avatar
         })
@@ -93,10 +80,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers
       })
       .then(this._handleResponse);
   }
@@ -104,10 +88,7 @@ class Api {
   putLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers
       })
       .then(this._handleResponse);
   }
@@ -115,10 +96,7 @@ class Api {
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
-          "Content-Type": "application/json",
-        },
+        headers: this._headers
       })
       .then(this._handleResponse);
   }
@@ -126,4 +104,8 @@ class Api {
 
 export const api = new Api({
   baseUrl: "https://api.mestoproject.nomoredomains.sbs",
+  headers: {
+    "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
+    "Content-Type": "application/json",
+  },
 });
