@@ -16,14 +16,14 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers,
       })
       .then(this._handleResponse);
   }
 
-  getUserInfo(token) {
+  getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers,
       })
