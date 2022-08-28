@@ -211,8 +211,8 @@ function App() {
   function handleLogin(email, password) {
     auth
       .authorize(email, password)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
         setLoggedIn(true);
         navigate("/");
       })
