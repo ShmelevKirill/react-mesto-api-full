@@ -211,9 +211,11 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
+        if (res.token) {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
         navigate("/");
+        }
       })
       .catch((err) => {
         console.log(err);
