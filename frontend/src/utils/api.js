@@ -7,6 +7,10 @@ class Api {
     this._headers = headers;
   }
 
+  _getAuthHeader() {
+    const jwt = localStorage.getItem('jwt');
+    return jwt ? { Authorization: `Bearer ${jwt}` } : {};
+  }
 
   _handleResponse = (res) => {
     if (res.ok) {
@@ -18,14 +22,16 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-        headers: this._headers,
+      method: 'GET',
+        headers: { ...this._headers, ...this._getAuthHeader() },
       })
       .then(this._handleResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-        headers: this._headers,
+      method: 'GET',
+      headers: { ...this._headers, ...this._getAuthHeader() },
       })
       .then(this._handleResponse);
   }
@@ -40,7 +46,7 @@ class Api {
   }) {
     return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
-        headers: this._headers,
+        headers: { ...this._headers, ...this._getAuthHeader() },
         body: JSON.stringify({
           name,
           link
@@ -55,7 +61,7 @@ class Api {
   }) {
     return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: { ...this._headers, ...this._getAuthHeader() },
         body: JSON.stringify({
           name,
           about
@@ -69,7 +75,7 @@ class Api {
   }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: { ...this._headers, ...this._getAuthHeader() },
         body: JSON.stringify({
           avatar
         })
@@ -80,7 +86,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: { ...this._headers, ...this._getAuthHeader() },
       })
       .then(this._handleResponse);
   }
@@ -88,7 +94,7 @@ class Api {
   putLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: this._headers
+        headers: { ...this._headers, ...this._getAuthHeader() },
       })
       .then(this._handleResponse);
   }
@@ -96,7 +102,7 @@ class Api {
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: { ...this._headers, ...this._getAuthHeader() },
       })
       .then(this._handleResponse);
   }
