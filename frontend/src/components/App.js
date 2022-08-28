@@ -42,16 +42,15 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
+    if (loggedIn) {
       api
-        .getUserInfo(jwt)
+        .getUserInfo()
         .then((res) => {
           setCurrentUser(res);
         })
         .catch((err) => console.log(err));
       api
-        .getInitialCards(jwt)
+        .getInitialCards()
         .then((res) => {
          setCards(res.reverse());
         })
@@ -211,8 +210,8 @@ function App() {
   function handleLogin(email, password) {
     auth
       .authorize(email, password)
-      .then((data) => {
-        localStorage.setItem("jwt", data.token);
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
         navigate("/");
       })
