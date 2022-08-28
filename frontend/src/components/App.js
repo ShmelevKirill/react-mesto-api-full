@@ -211,7 +211,7 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        if (res.token) {
+        if (res.jwt) {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
         navigate("/");
