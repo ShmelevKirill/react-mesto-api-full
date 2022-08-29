@@ -101,7 +101,7 @@ class Api {
       .then(this._handleResponse);
   }
 
-  putLike(cardId) {
+  setLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: {
