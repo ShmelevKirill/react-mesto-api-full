@@ -1,10 +1,8 @@
 class Api {
   constructor({
     baseUrl,
-    //headers
   }) {
     this._baseUrl = baseUrl;
-    //this._headers = headers;
   }
 
 
@@ -128,5 +126,4 @@ class Api {
 
 export const api = new Api({
   baseUrl: "https://api.mestoproject.nomoredomains.sbs",
-  
 });
