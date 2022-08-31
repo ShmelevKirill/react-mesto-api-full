@@ -18,7 +18,7 @@
 
 ## Инструкция по разрёртыванию проекта:
 * клонирование репозитория
-$ git clone https://github.com/goldlexx/react-mesto-api-full.git
+$ git clone https://github.com/ShmelevKirill/react-mesto-api-full.git
 
 * установка зависимостей
 $ npm install
